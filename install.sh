@@ -1,22 +1,54 @@
 #!/bin/bash
+
 dirdw="/tmp/zabins"
 dirins="/etc/zabbix/scripts"
 dirag="/etc/zabbix/agentd.d"
 
-mkdir $dirdw
-
-if [ ! -d "$dirins"]; then
-    mkdir $dirins
+if [ ! -d "$dirdw"]; then
+    mkdir -p "$dirdw"
 fi
 
-wget -P $dirdw "https://raw.githubusercontent.com/mkoblako/zabbix/main/mon_zimbra.conf"
-wget -P $dirdw "https://raw.githubusercontent.com/mkoblako/zabbix/main/zimbra_services.sh"
-wget -P $dirdw "https://github.com/mkoblako/zabbix/blob/main/zimbra_version.sh"
-wget -P $dirdw "https://github.com/mkoblako/zabbix/blob/main/sudo_zabbix_agent.conf"
+if [ ! -d "$dirins" ]; then
+    mkdir -p "$dirins"
+fi
 
-cp $dirdw/sudo_zabbix_agent.conf /etc/sudoers.d
-cp $dirdw/mon_zimbra.conf $dirag
-cp $dirdw/zimbra_services.sh $dirins
-cp $dirdw/zimbra_version.sh $dirins
+# Скачивание файлов во временную директорию
+wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/mon_zimbra.conf"
+wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/zimbra_services.sh"
+wget -P "$dirdw" "https://github.com/mkoblako/zabbix/blob/main/zimbra_version.sh"
+wget -P "$dirdw" "https://github.com/mkoblako/zabbix/blob/main/sudo_zabbix_agent.conf"
+
+
+if [ $? -eq 0 ]; then
+    echo "Файлы успешно скачаны."
+else
+    echo "Ошибка при скачивании файлов."
+    exit 1
+fi
+
+# Копирование скриптов и конфигов
+cp "$dirdw/sudo_zabbix_agent.conf" /etc/sudoers.d
+cp "$dirdw/mon_zimbra.conf" "$dirag"
+cp "$dirdw/zimbra_services.sh" "$dirins"
+cp "$dirdw/zimbra_version.sh" "$dirins"
+
+
+if [ $? -eq 0 ]; then
+    echo "Файлы успешно скопированы."
+else
+    echo "Ошибка при копировании файлов."
+    exit 1
+fi
+
 
 systemctl restart zabbix-agent
+
+
+if [ $? -eq 0 ]; then
+    echo "Служба zabbix-agent успешно перезапущена."
+else
+    echo "Ошибка при перезапуске службы zabbix-agent."
+    exit 1
+fi
+
+exit 0
