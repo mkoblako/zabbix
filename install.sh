@@ -2,7 +2,7 @@
 
 dirdw="/tmp/zabins"
 dirins="/etc/zabbix/scripts"
-dirag="/etc/zabbix/agentd.d"
+dirag="/etc/zabbix/zabbix_agentd.d"
 
 if [ ! -d "$dirdw"]; then
     mkdir -p "$dirdw"
