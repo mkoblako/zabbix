@@ -27,7 +27,7 @@ else
 fi
 
 # Копирование скриптов и конфигов
-cp "$dirdw/sudo_zabbix_agent.conf" /etc/sudoers.d
+sudo cp "$dirdw/sudo_zabbix_agent.conf" /etc/sudoers.d
 cp "$dirdw/mon_zimbra.conf" "$dirag"
 cp "$dirdw/zimbra_services.sh" "$dirins"
 cp "$dirdw/zimbra_version.sh" "$dirins"
@@ -40,8 +40,10 @@ else
     exit 1
 fi
 
+sudo chmod +x "$dirins/zimbra_services.sh"
+sudo chmod +x "$dirins/zimbra_version.sh"
 
-systemctl restart zabbix-agent
+sudo systemctl restart zabbix-agent
 
 
 if [ $? -eq 0 ]; then
