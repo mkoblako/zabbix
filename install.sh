@@ -15,8 +15,8 @@ fi
 # Скачивание файлов во временную директорию
 wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/mon_zimbra.conf"
 wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/zimbra_services.sh"
-wget -P "$dirdw" "https://github.com/mkoblako/zabbix/blob/main/zimbra_version.sh"
-wget -P "$dirdw" "https://github.com/mkoblako/zabbix/blob/main/sudo_zabbix_agent.conf"
+wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/zimbra_version.sh"
+wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/sudo_zabbix_agent.conf"
 
 
 if [ $? -eq 0 ]; then
