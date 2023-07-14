@@ -16,7 +16,7 @@ fi
 wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/mon_zimbra.conf"
 wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/zimbra_services.sh"
 wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/zimbra_version.sh"
-wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/sudo_zabbix_agent"
+wget -P "$dirdw" "https://raw.githubusercontent.com/mkoblako/zabbix/main/sudo_zabbix_agent.conf"
 
 
 if [ $? -eq 0 ]; then
@@ -27,7 +27,7 @@ else
 fi
 
 # Копирование скриптов и конфигов
-sudo cp "$dirdw/sudo_zabbix_agent" /etc/sudoers.d
+sudo cp "$dirdw/sudo_zabbix_agent.conf" /etc/sudoers.d
 cp "$dirdw/mon_zimbra.conf" "$dirag"
 cp "$dirdw/zimbra_services.sh" "$dirins"
 cp "$dirdw/zimbra_version.sh" "$dirins"
@@ -42,6 +42,9 @@ fi
 
 sudo chmod +x "$dirins/zimbra_services.sh"
 sudo chmod +x "$dirins/zimbra_version.sh"
+
+sudo mv /etc/sudoers.d/sudo_zabbix_agent.conf /etc/sudoers.d/sudo_zabbix_agent
+
 
 sudo systemctl restart zabbix-agent
 
