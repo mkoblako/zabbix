@@ -32,3 +32,4 @@ case "$1" in
           echo 1
         fi
     ;;
+esac
