@@ -148,7 +148,7 @@
                     <description/>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Zimbra service status &quot;$1&quot;</name>
+                            <name>Zimbra service status {#ZIMBRASERVICE}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
