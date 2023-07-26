@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>Template Zimbra Services</template>
-            <name>Template Zimbra Services</name>
+            <template>Zimbra Monitoring</template>
+            <name>Zimbra Monitoring</name>
             <description/>
             <groups>
                 <group>
@@ -196,7 +196,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Zimbra Services:zimbra.status[{#ZIMBRASERVICE}].last()}&lt;&gt;1</expression>
+                            <expression>{Zimbra Monitoring:zimbra.status[{#ZIMBRASERVICE}].last()}&lt;&gt;1</expression>
                             <name>Zimbra service &quot;{#ZIMBRASERVICE}&quot; not running on {HOST.NAME}</name>
                             <url/>
                             <status>0</status>
@@ -217,7 +217,7 @@
     </templates>
     <triggers>
         <trigger>
-            <expression>{Template Zimbra Services:zimbra.queue.last()}&gt;200 and {Template Zimbra Services:zimbra.queue.last()}&lt;500</expression>
+            <expression>{Zimbra Monitoring:zimbra.queue.last()}&gt;200 and {Zimbra Monitoring:zimbra.queue.last()}&lt;500</expression>
             <name>Zimbra queue greater than 200 messages</name>
             <url/>
             <status>0</status>
@@ -227,7 +227,7 @@
             <dependencies/>
         </trigger>
         <trigger>
-            <expression>{Template Zimbra Services:zimbra.queue.last()}&gt;500</expression>
+            <expression>{Zimbra Monitoring:zimbra.queue.last()}&gt;500</expression>
             <name>Zimbra queue greater than 500 messages</name>
             <url/>
             <status>0</status>
