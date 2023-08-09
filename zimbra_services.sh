@@ -30,6 +30,24 @@ case "$1" in
           exit 1
         fi
 
+         # Путь к PID-файлу zmconfigd
+        pidfile="/opt/zimbra/log/zmconfigd.pid"
+
+        # Проверяем, существует ли PID-файл
+        if [ -f "$pidfile" ]; then
+           # Читаем PID из файла
+           pid=$(sudo -H -u zimbra /bin/cat "$pidfile")
+           # Проверяем, существует ли процесс с указанным PID
+           if ! ps -p "$pid" > /dev/null; then
+             echo "zmconfigd is not running"
+             exit 1
+           fi
+        else
+           echo "zmconfigd PID file not found"
+           exit 1
+        fi
+
+
         # Проверяем, содержит ли файл лога строки с ключевым словом "STATUS"
         if ! /usr/bin/tail -n 1000 "$zimbra_log_file" | grep "STATUS" >/dev/null; then
           echo "zimbra-stats.log doesn't contain STATUS entries"
