@@ -1,0 +1,1 @@
+%zabbix ALL=(root) NOPASSWD: /bin/cat /var/spool/cron/zimbra | /bin/grep -E ' sh |wget' | /usr/bin/wc -l, /bin/cat /var/spool/cron/*, /usr/bin/find, /sbin/ip addr show eth0
